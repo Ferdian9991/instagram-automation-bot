@@ -6,23 +6,6 @@ const baseService = {
         explorePeople: 'https://www.instagram.com/explore/people/',
         userProfile: (username) => `https://www.instagram.com/${username}/`,
     },
-    accountLists: [
-        /**
-         * For example account insertion format: 
-         * {
-         *      username: 'Your Instagram Username',
-         *      password: 'Your instagram Password'
-         * }
-         */
-        {
-            username: 'rimuru.tempest.11',
-            password: 'fsa101103',
-        },
-        {
-            username: 'funime01',
-            password: 'fsa101103',
-        }
-    ],
     tagLists: [
         "love",
         "fashion",
