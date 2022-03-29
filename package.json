@@ -4,7 +4,7 @@
   "description": "automation-bot",
   "main": "index.js",
   "scripts": {
-    "test": "console.log('hallo world!')",
+    "test": "node test.js",
     "start": "node index.js"
   },
   "keywords": [
@@ -13,14 +13,17 @@
   "author": "Ferdian9991 <ferdisatria15@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "cli-columns": "^4.0.0",
-    "figlet": "^1.5.2",
-    "path": "^0.12.7",
     "chalk": "^2.4.2",
+    "cli-columns": "^4.0.0",
+    "cli-table3": "^0.6.1",
+    "figlet": "^1.5.2",
+    "inquirer": "^8.2.2",
+    "path": "^0.12.7",
     "puppeteer": "^13.5.1",
     "puppeteer-extra": "^3.2.3",
     "puppeteer-extra-plugin-stealth": "^2.9.0",
     "readline-sync": "^1.4.10",
+    "simple-json-db": "^2.0.0",
     "user-agents": "^1.0.958"
   }
 }

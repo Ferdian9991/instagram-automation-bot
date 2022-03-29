@@ -28,6 +28,7 @@ class Instagram {
   ) {
     try {
       const { button, input, custom } = selector.loginPage;
+      let isSuccess = true;
       const sessionDir = join(
         __dirname,
         `../session/${nameService}`,
@@ -70,24 +71,31 @@ class Instagram {
           delay: 120,
         });
         await page.click(button.submitLogin, { delay: 100 });
-        await page.waitForNavigation();
-        console.log(
-          chalk.green(`Loged in as ${account.username} without session`)
-        );
         await page.waitForTimeout(2000);
-        await getCookies(page, account.username, nameService);
-        await page.goto(base, { timeout: 0 });
+        const loginError = await page.$('p[data-testid="login-error-message"]');
+        if (loginError == null) {
+          await page.waitForNavigation();
+          console.log(
+            chalk.green(`Loged in as ${account.username} without session`)
+          );
+          await page.waitForTimeout(2000);
+          await getCookies(page, account.username, nameService);
+          await page.goto(base, { timeout: 0 });
+        } else {
+          isSuccess = false;
+          await browser.close();
+        }
       } else {
         console.log(
           chalk.green(`Loged in as ${account.username} with active session`)
         );
       }
-      await page.waitForTimeout(100);
 
       return {
         page,
         browser,
         account,
+        isSuccess,
       };
     } catch (e) {
       console.log(`There are something error!`);

@@ -39,6 +39,9 @@ node_modules/
 session/
 jspm_packages/
 
+#Database
+db.json
+
 # Typescript v1 declaration files
 typings/
 

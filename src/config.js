@@ -14,6 +14,14 @@ const baseService = {
          *      password: 'Your instagram Password'
          * }
          */
+        {
+            username: 'rimuru.tempest.11',
+            password: 'fsa101103',
+        },
+        {
+            username: 'funime01',
+            password: 'fsa101103',
+        }
     ],
     tagLists: [
         "love",
