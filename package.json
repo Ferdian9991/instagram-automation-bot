@@ -1,0 +1,26 @@
+{
+  "name": "automation-bot",
+  "version": "0.0.1",
+  "description": "automation-bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "console.log('hallo world!')",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "automation-bot"
+  ],
+  "author": "Ferdian9991 <ferdisatria15@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cli-columns": "^4.0.0",
+    "figlet": "^1.5.2",
+    "path": "^0.12.7",
+    "chalk": "^2.4.2",
+    "puppeteer": "^13.5.1",
+    "puppeteer-extra": "^3.2.3",
+    "puppeteer-extra-plugin-stealth": "^2.9.0",
+    "readline-sync": "^1.4.10",
+    "user-agents": "^1.0.958"
+  }
+}
