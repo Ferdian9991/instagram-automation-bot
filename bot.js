@@ -37,7 +37,7 @@ const bot = async (account) => {
   const { page, browser, isSuccess } = await login(account);
 
   if (isSuccess) {
-    for (let i = 0; i < Infinity; i++) {
+    while (true) {
       await exploreTags({
         driver: {
           page,

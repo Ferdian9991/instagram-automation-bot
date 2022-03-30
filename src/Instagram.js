@@ -13,6 +13,12 @@ const logger = (message) => {
   console.log(chalk.cyan(timestamps) + ":", message);
 };
 
+const delay = (t, v) => {
+  return new Promise(function (resolve) {
+    setTimeout(resolve.bind(null, v), t);
+  });
+};
+
 class Instagram {
   /**
    * Function parameters
@@ -84,6 +90,9 @@ class Instagram {
         } else {
           isSuccess = false;
           await browser.close();
+          await delay(1000);
+          console.log(chalk.red(`\n⚠  Invalid login credential!!!`));
+          await delay(3000);
         }
       } else {
         console.log(
@@ -98,6 +107,7 @@ class Instagram {
         isSuccess,
       };
     } catch (e) {
+      console.log(e)
       console.log(`There are something error!`);
       process.exit(1);
     }
