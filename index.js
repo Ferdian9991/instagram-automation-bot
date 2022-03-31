@@ -130,7 +130,7 @@ ascii.welcome(async () => {
                   });
 
                   users
-                    .filter((user) => user.password == selectedAccount.password)
+                    .filter((user) => user.username == selectedAccount.username)
                     .forEach(
                       (user) => (user.password = editedPassword.password)
                     );
@@ -225,39 +225,57 @@ ascii.welcome(async () => {
         ascii.welcome();
         break;
       case "Create Account":
-        db = new JSONdb("./db.json");
-        users = db.get("Users");
-        const data = users == undefined ? [] : users;
+        const createAccount = async () => {
+          db = new JSONdb("./db.json");
+          users = db.get("Users");
+          const data = users == undefined ? [] : users;
 
-        const isCreateAccount = readlineSync.question(
-          "\nDo you want to create account ? (y/n): "
-        );
+          const isCreateAccount = readlineSync.question(
+            "\nDo you want to create account ? (y/n): "
+          );
 
-        if (isCreateAccount.trim() == "y") {
-          const inputUsername = await inquirer.prompt({
-            type: "input",
-            name: "username",
-            message: "Input your instagram username",
-          });
+          if (isCreateAccount.trim() == "y") {
+            const inputUsername = await inquirer.prompt({
+              type: "input",
+              name: "username",
+              message: "Input your instagram username",
+            });
 
-          const inputPassword = await inquirer.prompt({
-            type: "input",
-            name: "password",
-            message: "Input your instagram password",
-          });
+            const inputPassword = await inquirer.prompt({
+              type: "input",
+              name: "password",
+              message: "Input your instagram password",
+            });
 
-          data.push({
-            username: inputUsername.username.trim(),
-            password: inputPassword.password.trim(),
-          });
+            const foundUser = users.filter((user) => {
+              return user.username === inputUsername.username;
+            })[0];
 
-          db.set("Users", data);
-          logger(`\nSuccessfully added ${inputUsername.username.trim()}`);
+            if (!foundUser) {
+              data.push({
+                username: inputUsername.username.trim(),
+                password: inputPassword.password.trim(),
+              });
 
-          await delay(3000);
-        }
-        process.stdout.write("\x1Bc");
-        ascii.welcome();
+              db.set("Users", data);
+              logger(`\nSuccessfully added ${inputUsername.username.trim()}`);
+              await delay(3000);
+            } else {
+              logger(
+                chalk.red(
+                  `\n⚠  Cannot create ${inputUsername.username.trim()}, user has been registered!`
+                )
+              );
+              await delay(3000);
+              process.stdout.write("\x1Bc");
+              ascii.welcome();
+              await createAccount();
+            }
+          }
+          process.stdout.write("\x1Bc");
+          ascii.welcome();
+        };
+        await createAccount();
         break;
       case "← Exit":
         process.exit();
